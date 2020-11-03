@@ -1,0 +1,32 @@
+<%= render 'friends/lookup' %>
+
+<%if  @friendships.size >0 %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @friendships.each do |friend| %>
+        <tr>
+          <td><%= friend.full_name %>
+          <td><%= friend.email %>
+          <td>
+          <%= link_to "View", user_path(friend), class: "btn btn-xs btn-primary" %>
+          <%= link_to "Remove", friendship_path(friend), 
+                                      method: :delete,
+                                      data: {confirm: "Are You Sure?"}, 
+                                      class: "btn btn-xs btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+<div class="row col-lg-12">
+  <p class="lead">You Don't have any friends yet...</p>
+  </div>
+<% end %>
